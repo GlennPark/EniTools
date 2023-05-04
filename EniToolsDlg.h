@@ -1,6 +1,5 @@
 ﻿
 // EniToolsDlg.h: 헤더 파일
-//
 
 #pragma once
 #include <string>
@@ -34,8 +33,6 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
-
-	virtual void DoDataExchange(CDataExchange* pDX);
 
 	afx_msg void OnBnClickedLoadini();
 	afx_msg void OnBnClickedSaveini();

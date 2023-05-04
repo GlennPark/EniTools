@@ -110,7 +110,8 @@ BOOL CEniToolsDlg::OnInitDialog()
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
 	m_chkKorean.SubclassDlgItem(IDC_KOREAN, this);
 	m_chkEnglish.SubclassDlgItem(IDC_ENGLISH, this);
-
+	//LoadIniFile();
+	UpdateUI();
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -278,40 +279,44 @@ void CEniToolsDlg::OnBnClickedEnglish()
 	UpdateUI();
 }
 
+
 void CEniToolsDlg::UpdateUI()
 {
-	auto lang = m_iniData.Lookup(_T("language"));
-	if (lang != m_iniData.Lookup(_T("language"))
+	CString line;
+	if (m_iniData.Lookup(_T("language"), line))
 	{
-		if (lang->second == "Korean")
+		if (line.CompareNoCase(_T("korean")) == 0)
 		{
-			GetDlgItem(IDC_KOREAN)->SendMessage(BM_SETCHECK, BST_CHECKED, 0);
-			GetDlgItem(IDC_ENGLISH)->SendMessage(BM_SETCHECK, BST_UNCHECKED, 0);
+			m_chkKorean.SetCheck(TRUE);
+			m_chkEnglish.SetCheck(FALSE);
 		}
-		else if (lang->second == "English")
+		else if (line.CompareNoCase(_T("english")) == 0)
 		{
-			GetDlgItem(IDC_KOREAN)->SendMessage(BM_SETCHECK, BST_UNCHECKED, 0);
-			GetDlgItem(IDC_ENGLISH)->SendMessage(BM_SETCHECK, BST_CHECKED, 0);
+			m_chkKorean.SetCheck(FALSE);
+			m_chkEnglish.SetCheck(TRUE);
 		}
 	}
 }
+
+//void CEniToolsDlg::UpdateUI()
+//{
+//	auto language = m_iniData.Lookup(_T("language"));
+//	if (language != m_iniData.Lookup(_T("language")))
+//	{
+//		if (lang->second == "Korean")
+//		{
+//			GetDlgItem(IDC_KOREAN)->SendMessage(BM_SETCHECK, BST_CHECKED, 0);
+//			GetDlgItem(IDC_ENGLISH)->SendMessage(BM_SETCHECK, BST_UNCHECKED, 0);
+//		}
+//		else if (lang->second == "English")
+//		{
+//			GetDlgItem(IDC_KOREAN)->SendMessage(BM_SETCHECK, BST_UNCHECKED, 0);
+//			GetDlgItem(IDC_ENGLISH)->SendMessage(BM_SETCHECK, BST_CHECKED, 0);
+//		}
+//	}
+//}
 
 
 // 시작
 
 
-// INI 파일을 저장하는 함수
-void CEniToolsDlg::SaveIniFile(const CString& filePath)
-{
-	CStdioFile iniFile;
-	if (iniFile.Open(filePath, CFile::modeCreate | CFile::modeWrite | CFile::typeText))
-	{
-		POSITION pos = m_iniData.GetStartPosition();
-		CString key, value;
-		while (pos != NULL)
-		{
-			m_iniData.GetNextAssoc(pos, key, value);
-			CString line = key + _T("=") + value + _T("\r\n");
-		}
-	}
-}
