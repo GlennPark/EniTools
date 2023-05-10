@@ -1,0 +1,28 @@
+0510
+
+EniTools
+
+확장성 : Section 마다 Class 구분 (섹션명.cpp)
+
+Section 마다 Dialog 구분(IDD_DIALOG_섹션명)
+
+List Control 에 섹션별 Icon 을 넣고, 더블 클릭시 Dialog 호출
+
+Ini 파일은 기본 루트 디렉토리(경로 설정)지만 Load 버튼을 눌러서 직접 로딩 가능
+
+로그인 페이지 -> 섹션 별 접근 권한 부여(크게 2~3단계면 충분) -> 후순휘
+
+Ui : 기본 틀에서 사용자 친화적인 부가 설명 추가
+
+Get, Set Private Profile String 같은 Api 함수 사용할 것
+
+Window Icon (기본 아이콘 등록 및 삭제 -> 섹션 등록 및 삭제... 가능할까?)
+
+
+Simple Viewer 정리사항
+
+OpenCV 연동한 그림판 형식의 뷰어 & 편집 툴
+
+편집한 파일을 전송하고 채팅하는 기능 추가
+
+Ui 특성은 EniTools 와 통일감 있게 구성(아이콘 클릭)
